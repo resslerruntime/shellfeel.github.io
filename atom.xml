@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://shellfeel.github.io/"/>
-  <updated>2017-07-11T06:51:12.282Z</updated>
+  <updated>2017-07-11T08:35:15.753Z</updated>
   <id>https://shellfeel.github.io/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>c#ConnectDb</title>
+    <title>使用c#连接MySQL数据库</title>
     <link href="https://shellfeel.github.io/2017/07/11/c-ConnectDb/"/>
     <id>https://shellfeel.github.io/2017/07/11/c-ConnectDb/</id>
     <published>2017-07-11T06:37:26.000Z</published>
-    <updated>2017-07-11T06:51:12.282Z</updated>
+    <updated>2017-07-11T08:35:15.753Z</updated>
     
     <content type="html"><![CDATA[<h2 id="1-下载安装MySQL或者xampp"><a href="#1-下载安装MySQL或者xampp" class="headerlink" title="1. 下载安装MySQL或者xampp"></a>1. 下载安装MySQL或者xampp</h2><blockquote>
 <p>XAMPP是完全免费且易于安装的Apache发行版，其中包含MariaDB、PHP和Perl。XAMPP开放源码包的设置让安装和使用出奇容易。</p>
