@@ -4,9 +4,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
-  <updated>2017-07-11T03:47:45.623Z</updated>
-  <id>http://yoursite.com/</id>
+  <link href="https://shellfeel.github.io/"/>
+  <updated>2017-07-11T05:22:23.670Z</updated>
+  <id>https://shellfeel.github.io/</id>
   
   <author>
     <name>ShellFeel</name>
@@ -16,38 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>first</title>
-    <link href="http://yoursite.com/2017/07/11/1/"/>
-    <id>http://yoursite.com/2017/07/11/1/</id>
-    <published>2017-07-11T03:42:00.000Z</published>
-    <updated>2017-07-11T03:47:45.623Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="你好"><a href="#你好" class="headerlink" title="你好"></a>你好</h2><p>你好啊</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">  <span class="keyword">echo</span> <span class="string">"hello world!"</span>;</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;你好&quot;&gt;&lt;a href=&quot;#你好&quot; class=&quot;headerlink&quot; title=&quot;你好&quot;&gt;&lt;/a&gt;你好&lt;/h2&gt;&lt;p&gt;你好啊&lt;/p&gt;
-&lt;figure class=&quot;highlight php&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;p
-    
-    </summary>
-    
-      <category term="PHP" scheme="http://yoursite.com/categories/PHP/"/>
-    
-    
-      <category term="php" scheme="http://yoursite.com/tags/php/"/>
-    
-      <category term="security" scheme="http://yoursite.com/tags/security/"/>
-    
-  </entry>
-  
-  <entry>
     <title>c#连接MySQL数据库</title>
-    <link href="http://yoursite.com/2017/07/11/123/"/>
-    <id>http://yoursite.com/2017/07/11/123/</id>
+    <link href="https://shellfeel.github.io/2017/07/11/using%20c#%20connect%20mysql/"/>
+    <id>https://shellfeel.github.io/2017/07/11/using c# connect mysql/</id>
     <published>2017-07-11T03:33:24.603Z</published>
-    <updated>2017-07-11T03:34:13.459Z</updated>
+    <updated>2017-07-11T05:22:23.670Z</updated>
     
     <content type="html"><![CDATA[<h2 id="1-下载安装MySQL或者xampp"><a href="#1-下载安装MySQL或者xampp" class="headerlink" title="1. 下载安装MySQL或者xampp"></a>1. 下载安装MySQL或者xampp</h2><blockquote>
 <p>XAMPP是完全免费且易于安装的Apache发行版，其中包含MariaDB、PHP和Perl。XAMPP开放源码包的设置让安装和使用出奇容易。</p>
@@ -64,16 +37,16 @@
 <h3 id="3-在Visual-Studio中添加对MySQL库的引用"><a href="#3-在Visual-Studio中添加对MySQL库的引用" class="headerlink" title="3. 在Visual Studio中添加对MySQL库的引用"></a>3. 在Visual Studio中添加对MySQL库的引用</h3><ul>
 <li>在vs中选择引用 右键添加引用</li>
 </ul>
-<p><img src="./icon/Mysqlsrc.png" alt="Mysqlsrc"></p>
+<p><img src="./201701111322/Mysqlsrc.png" alt="Mysqlsrc"></p>
 <ul>
 <li>在弹出来的对话框中搜索Mysql。然后选择MySql.Data这个包</li>
 </ul>
-<p><img src="./icon/MysqlData.png" alt="MysqlDta"></p>
+<p><img src="./201701111322/MysqlData.png" alt="MysqlDta"></p>
 <ul>
 <li>在源代码上using 这个包</li>
 </ul>
 <p><code>using MySql.Data.MySqlClient;</code></p>
-<h2 id="4-打开xampp或者MySQL"><a href="#4-打开xampp或者MySQL" class="headerlink" title="4. 打开xampp或者MySQL"></a>4. 打开xampp或者MySQL</h2><p><img src="./icon/xampp.png" alt="xampp"></p>
+<h2 id="4-打开xampp或者MySQL"><a href="#4-打开xampp或者MySQL" class="headerlink" title="4. 打开xampp或者MySQL"></a>4. 打开xampp或者MySQL</h2><p><img src="./201701111322/xampp.png" alt="xampp"></p>
 <h2 id="5-创建测试数据库"><a href="#5-创建测试数据库" class="headerlink" title="5. 创建测试数据库"></a>5. 创建测试数据库</h2><ul>
 <li>​</li>
 </ul>
@@ -82,33 +55,6 @@
     <summary type="html">
     
       &lt;h2 id=&quot;1-下载安装MySQL或者xampp&quot;&gt;&lt;a href=&quot;#1-下载安装MySQL或者xampp&quot; class=&quot;headerlink&quot; title=&quot;1. 下载安装MySQL或者xampp&quot;&gt;&lt;/a&gt;1. 下载安装MySQL或者xampp&lt;/h2&gt;&lt;blockq
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://yoursite.com/2017/07/11/hello-world/"/>
-    <id>http://yoursite.com/2017/07/11/hello-world/</id>
-    <published>2017-07-11T03:07:42.215Z</published>
-    <updated>2017-07-11T03:07:42.215Z</updated>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
     
     </summary>
     
