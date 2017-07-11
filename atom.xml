@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://shellfeel.github.io/"/>
-  <updated>2017-07-11T06:48:59.730Z</updated>
+  <updated>2017-07-11T06:51:12.282Z</updated>
   <id>https://shellfeel.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://shellfeel.github.io/2017/07/11/c-ConnectDb/"/>
     <id>https://shellfeel.github.io/2017/07/11/c-ConnectDb/</id>
     <published>2017-07-11T06:37:26.000Z</published>
-    <updated>2017-07-11T06:48:59.730Z</updated>
+    <updated>2017-07-11T06:51:12.282Z</updated>
     
     <content type="html"><![CDATA[<h2 id="1-下载安装MySQL或者xampp"><a href="#1-下载安装MySQL或者xampp" class="headerlink" title="1. 下载安装MySQL或者xampp"></a>1. 下载安装MySQL或者xampp</h2><blockquote>
 <p>XAMPP是完全免费且易于安装的Apache发行版，其中包含MariaDB、PHP和Perl。XAMPP开放源码包的设置让安装和使用出奇容易。</p>
@@ -37,16 +37,16 @@
 <h3 id="3-在Visual-Studio中添加对MySQL库的引用"><a href="#3-在Visual-Studio中添加对MySQL库的引用" class="headerlink" title="3. 在Visual Studio中添加对MySQL库的引用"></a>3. 在Visual Studio中添加对MySQL库的引用</h3><ul>
 <li>在vs中选择引用 右键添加引用</li>
 </ul>
-<p><img src="./image/c-ConnectDb/Mysqlsrc.png" alt="Mysqlsrc"></p>
+<p><img src="/image/c-ConnectDb/Mysqlsrc.png" alt="Mysqlsrc"></p>
 <ul>
 <li>在弹出来的对话框中搜索Mysql。然后选择MySql.Data这个包</li>
 </ul>
-<p><img src="./image/c-ConnectDb/MysqlData.png" alt="MysqlDta"></p>
+<p><img src="/image/c-ConnectDb/MysqlData.png" alt="MysqlDta"></p>
 <ul>
 <li>在源代码上using 这个包</li>
 </ul>
 <p><code>using MySql.Data.MySqlClient;</code></p>
-<h2 id="4-打开xampp或者MySQL"><a href="#4-打开xampp或者MySQL" class="headerlink" title="4. 打开xampp或者MySQL"></a>4. 打开xampp或者MySQL</h2><p><img src="./image/c-ConnectDb/xampp.png" alt="xampp"></p>
+<h2 id="4-打开xampp或者MySQL"><a href="#4-打开xampp或者MySQL" class="headerlink" title="4. 打开xampp或者MySQL"></a>4. 打开xampp或者MySQL</h2><p><img src="/image/c-ConnectDb/xampp.png" alt="xampp"></p>
 <h2 id="5-创建测试数据库"><a href="#5-创建测试数据库" class="headerlink" title="5. 创建测试数据库"></a>5. 创建测试数据库</h2><ul>
 <li>​</li>
 </ul>
