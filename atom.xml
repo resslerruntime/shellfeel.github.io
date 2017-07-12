@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://shellfeel.github.io/"/>
-  <updated>2017-07-11T08:35:15.753Z</updated>
+  <updated>2017-07-12T02:07:26.063Z</updated>
   <id>https://shellfeel.github.io/</id>
   
   <author>
@@ -16,11 +16,35 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>归来依然是少年</title>
+    <link href="https://shellfeel.github.io/2017/07/12/%E9%9A%8F%E7%AC%94/"/>
+    <id>https://shellfeel.github.io/2017/07/12/随笔/</id>
+    <published>2017-07-12T01:45:37.000Z</published>
+    <updated>2017-07-12T02:07:26.063Z</updated>
+    
+    <content type="html"><![CDATA[<p>愿你年少无知有人引导<br>愿你历经沧桑仍怀渴望<br>愿你得到心安失去坦然<br>愿你爱得勇敢走得潇洒<br>愿你找得到理由感动，找得到肩膀依靠<br>愿你风雨里像个大人，阳光下仍是孩子 </p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;愿你年少无知有人引导&lt;br&gt;愿你历经沧桑仍怀渴望&lt;br&gt;愿你得到心安失去坦然&lt;br&gt;愿你爱得勇敢走得潇洒&lt;br&gt;愿你找得到理由感动，找得到肩膀依靠&lt;br&gt;愿你风雨里像个大人，阳光下仍是孩子 &lt;/p&gt;
+
+    
+    </summary>
+    
+      <category term="随笔" scheme="https://shellfeel.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+      <category term="鸡汤" scheme="https://shellfeel.github.io/tags/%E9%B8%A1%E6%B1%A4/"/>
+    
+  </entry>
+  
+  <entry>
     <title>使用c#连接MySQL数据库</title>
     <link href="https://shellfeel.github.io/2017/07/11/c-ConnectDb/"/>
     <id>https://shellfeel.github.io/2017/07/11/c-ConnectDb/</id>
     <published>2017-07-11T06:37:26.000Z</published>
-    <updated>2017-07-11T08:35:15.753Z</updated>
+    <updated>2017-07-12T01:47:28.574Z</updated>
     
     <content type="html"><![CDATA[<h2 id="1-下载安装MySQL或者xampp"><a href="#1-下载安装MySQL或者xampp" class="headerlink" title="1. 下载安装MySQL或者xampp"></a>1. 下载安装MySQL或者xampp</h2><blockquote>
 <p>XAMPP是完全免费且易于安装的Apache发行版，其中包含MariaDB、PHP和Perl。XAMPP开放源码包的设置让安装和使用出奇容易。</p>
@@ -59,7 +83,9 @@
     </summary>
     
     
-      <category term="c# mysql" scheme="https://shellfeel.github.io/tags/c-mysql/"/>
+      <category term="c#" scheme="https://shellfeel.github.io/tags/c/"/>
+    
+      <category term="mysql" scheme="https://shellfeel.github.io/tags/mysql/"/>
     
   </entry>
   
