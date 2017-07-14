@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://shellfeel.github.io/"/>
-  <updated>2017-07-14T12:18:57.092Z</updated>
+  <updated>2017-07-14T14:14:36.980Z</updated>
   <id>https://shellfeel.github.io/</id>
   
   <author>
@@ -14,6 +14,145 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>从零开始搭建LAMP开发环境</title>
+    <link href="https://shellfeel.github.io/2017/07/14/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BALAMP%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/"/>
+    <id>https://shellfeel.github.io/2017/07/14/从零开始搭建LAMP开发环境/</id>
+    <published>2017-07-14T12:24:22.000Z</published>
+    <updated>2017-07-14T14:14:36.980Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="一、名词解释"><a href="#一、名词解释" class="headerlink" title="一、名词解释"></a>一、名词解释</h1><p><strong>LAMP</strong></p>
+<blockquote>
+<p><strong>LAMP</strong>是指一组通常一起使用来运行动态网站或者服务器的<a href="https://zh.wikipedia.org/wiki/%E8%87%AA%E7%94%B1%E8%BD%AF%E4%BB%B6" target="_blank" rel="external">自由软件</a>名称首字母缩写：</p>
+<ul>
+<li>Linux，操作系统</li>
+<li>Apache，网页服务器</li>
+<li>MariaDB或MySQL，数据库管理系统（或者数据库服务器）</li>
+<li>PHP、Perl或Python，脚本语言</li>
+</ul>
+</blockquote>
+<p><strong>SSH</strong></p>
+<blockquote>
+<p><em>Secure Shell</em>（缩写为SSH），由IETF的网络工作小组（<em>Network Working Group</em>）所制定；SSH为一项创建在<strong>应用层</strong>和<strong>传输层</strong>基础上的安全协议，为计算机上的Shell（壳层）提供安全的传输和使用环境。<br>传统的网络服务程序，如rsh、FTP、POP和Telnet其本质上都是不安全的；因为它们在网络上用明文传送数据、用户帐号和用户口令，很容易受到中间人（<em>man-in-the-middle</em>）攻击方式的攻击。就是存在另一个人或者一台机器冒充真正的服务器接收用户传给服务器的数据，然后再冒充用户把数据传给真正的服务器。</p>
+<p>而SSH是目前较可靠，专为远程登录会话和其他网络服务提供安全性的协议。利用SSH协议可以有效防止远程管理过程中的信息泄露问题。通过SSH可以对所有传输的数据进行加密，也能够防止DNS欺骗和IP欺骗。<br>SSH之另一项优点为其传输的数据可以是经过压缩的，所以可以加快传输的速度。SSH有很多功能，它既可以代替Telnet，又可以为FTP、POP、甚至为PPP提供一个安全的“通道”。</p>
+</blockquote>
+<h1 id="二、-环境介绍"><a href="#二、-环境介绍" class="headerlink" title="二、 环境介绍"></a>二、 环境介绍</h1><ul>
+<li>本文所用环境为阿里云学生机 <strong>Centos7.2 </strong>CPU1 核 内存 1024Mb</li>
+</ul>
+<ul>
+<li>远程连接工具为 Xshell</li>
+</ul>
+<ul>
+<li>Ftp 工具为 FileZilla</li>
+</ul>
+<h1 id="三、开始"><a href="#三、开始" class="headerlink" title="三、开始"></a>三、开始</h1><h2 id="一-配置-apache"><a href="#一-配置-apache" class="headerlink" title="(一)  配置 apache"></a>(一)  配置 apache</h2><ol>
+<li>使用 xshell 登录服务器，登录后效果图：</li>
+</ol>
+<p><img src="2017-07-14-从零开始搭建LAMP开发环境/image001.gif" alt="xshell"></p>
+<ol>
+<li>更新系统，使用 yum update 更新系统软件（接下来选择 yes）</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#yum update</span></div></pre></td></tr></table></figure>
+<p><img src="2017-07-14-从零开始搭建LAMP开发环境/image002.gif" alt="xshell"></p>
+<ol>
+<li>安装 apache（现在叫 httpd）</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#yum install httpd</span></div></pre></td></tr></table></figure>
+<p><img src="2017-07-14-从零开始搭建LAMP开发环境/image003.gif" alt="xshell"></p>
+<ol>
+<li>开启 httpd 服务</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#systemctl start httpd</span></div></pre></td></tr></table></figure>
+<ol>
+<li>防火墙添加 http 规则（–permanent     参数表示永久加入，重启依旧有效）</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#firewall-cmd --add-service=http –permanent</span></div></pre></td></tr></table></figure>
+<ol>
+<li>重启防火墙（在 linux 下 修改相关配置几乎都要 restart或者 reload 否则都不生效，别配置半天没有 restart然后气急败坏 ¬_¬ 好吧 这是我 ）</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#systemctl restart firewalld</span></div></pre></td></tr></table></figure>
+<ol>
+<li>使用浏览器访问你服务器对应ip 如果出现下面画面则配置成功</li>
+</ol>
+<h2 id="二-配置-MySQL"><a href="#二-配置-MySQL" class="headerlink" title="(二)  配置 MySQL"></a>(二)  配置 MySQL</h2><ol>
+<li><p>使用 yum install 命令安装 mariadb mariadb-server</p>
+</li>
+<li><blockquote>
+<p>mariadb 是 mysql 的正统开 源分支</p>
+</blockquote>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#yum install mariadb mariadb-server</span></div></pre></td></tr></table></figure>
+<ol>
+<li>开启 mariadb 服务</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#systemctl start mariadb</span></div></pre></td></tr></table></figure>
+<ol>
+<li>配置 mariadb 的用户名密码</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># mysql_secure_installation</span></div></pre></td></tr></table></figure>
+<ol>
+<li>重启 mariadb 服务</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#systemctl restart mariadb</span></div></pre></td></tr></table></figure>
+<ol>
+<li>测试连接数据库(-u 后面接用户名 注意不要加个空格)</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#mysql -uroot -p</span></div></pre></td></tr></table></figure>
+<ol>
+<li>测试 查询数据库</li>
+</ol>
+<h2 id="三-安装及配置-PHP"><a href="#三-安装及配置-PHP" class="headerlink" title="(三) 安装及配置 PHP"></a>(三) 安装及配置 PHP</h2><ol>
+<li>安装 php 及扩展（如 xml mysql 等常用扩展）</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># yum install php php-mysql php-gd libjpeg* php-ldap php-odbc php-pear   php-xml php-xmlrpc php-mbstring php-bcmath php-mhash</span></div></pre></td></tr></table></figure>
+<ol>
+<li>重启 apache 服务</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#systemctl restart httpd</span></div></pre></td></tr></table></figure>
+<ol>
+<li>安装 vim （emacs 滚粗）创建 php 测试文件</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#yum install vim</span></div><div class="line"><span class="comment">#vim /var/www/html/index.php</span></div></pre></td></tr></table></figure>
+<ol>
+<li>按下 i（插入模式）写下 hello world</li>
+<li>按下 Esc  输入“：” +“wq”（保存退出）</li>
+<li>使用浏览器访问 ip 查看，成功效果图</li>
+</ol>
+<h2 id="四-配置-phpMyAdmin"><a href="#四-配置-phpMyAdmin" class="headerlink" title="(四) 配置 phpMyAdmin"></a>(四) 配置 phpMyAdmin</h2><ol>
+<li>安装 phpmyadmin 及 php 扩展</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#yum install phpmyadmin php-mcrypt</span></div></pre></td></tr></table></figure>
+<ol>
+<li>配置 phpmyadmin（默认只能·本地访问 所以我们得让他远程访问）</li>
+<li>打开配置文件</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#vim  /etc/httpd/conf.d/phpMyAdmin.conf</span></div></pre></td></tr></table></figure>
+<ol>
+<li>按照如下修改（在配置文件 16-20  行 开启行数显示：在 vim 命令行下输入 set number）</li>
+<li>重启 apache 服务器</li>
+<li>用你的服务器 ip 加上 phpmyadmin 如：<a href="http://112.112.112.112/phpmyadmin" target="_blank" rel="external">http://112.112.112.112/phpmyadmin</a></li>
+<li>输入刚刚配置 mariadb 得用户名及密码即可正常使用</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;一、名词解释&quot;&gt;&lt;a href=&quot;#一、名词解释&quot; class=&quot;headerlink&quot; title=&quot;一、名词解释&quot;&gt;&lt;/a&gt;一、名词解释&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;LAMP&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;LAMP
+    
+    </summary>
+    
+      <category term="开发" scheme="https://shellfeel.github.io/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="LAMP" scheme="https://shellfeel.github.io/tags/LAMP/"/>
+    
+      <category term="Linux" scheme="https://shellfeel.github.io/tags/Linux/"/>
+    
+  </entry>
   
   <entry>
     <title>归来依然是少年</title>
