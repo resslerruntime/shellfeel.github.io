@@ -204,123 +204,113 @@
 <li>Ftp 工具为 FileZilla</li>
 </ul>
 <h1 id="三、开始"><a href="#三、开始" class="headerlink" title="三、开始"></a>三、开始</h1><h2 id="一-配置-apache"><a href="#一-配置-apache" class="headerlink" title="(一)  配置 apache"></a>(一)  配置 apache</h2><ol>
-<li>使用 xshell 登录服务器，登录后效果图：</li>
+<li><p>使用 xshell 登录服务器，登录后效果图：</p>
+<p> <img src="/2017/07/14/从零开始搭建LAMP开发环境/image001.gif" alt=""></p>
+</li>
+<li><p>更新系统，使用 yum update 更新系统软件（接下来选择 yes）</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#yum update</span></div></pre></td></tr></table></figure>
+<p> <img src="/2017/07/14/从零开始搭建LAMP开发环境/image002.gif" alt=""></p>
+</li>
+<li><p>安装 apache（现在叫 httpd）</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#yum install httpd</span></div></pre></td></tr></table></figure>
+<p> <img src="/2017/07/14/从零开始搭建LAMP开发环境/image003.gif" alt=""></p>
+</li>
+<li><p>开启 httpd 服务</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#systemctl start httpd</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>防火墙添加 http 规则（–permanent     参数表示永久加入，重启依旧有效）</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#firewall-cmd --add-service=http –permanent</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>重启防火墙（在 linux 下 修改相关配置几乎都要 restart或者 reload 否则都不生效，别配置半天没有 restart然后气急败坏 ¬_¬ 好吧 这是我 ）</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#systemctl restart firewalld</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>使用浏览器访问你服务器对应ip 如果出现下面画面则配置成功</p>
+<p> <img src="/2017/07/14/从零开始搭建LAMP开发环境/image004.gif" alt=""></p>
+</li>
 </ol>
-<p><img src="/2017/07/14/从零开始搭建LAMP开发环境/image001.gif" alt=""></p>
-<ol>
-<li>更新系统，使用 yum update 更新系统软件（接下来选择 yes）</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#yum update</span></div></pre></td></tr></table></figure>
-<p><img src="/2017/07/14/从零开始搭建LAMP开发环境/image002.gif" alt=""></p>
-<ol>
-<li>安装 apache（现在叫 httpd）</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#yum install httpd</span></div></pre></td></tr></table></figure>
-<p><img src="/2017/07/14/从零开始搭建LAMP开发环境/image003.gif" alt=""></p>
-<ol>
-<li>开启 httpd 服务</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#systemctl start httpd</span></div></pre></td></tr></table></figure>
-<ol>
-<li>防火墙添加 http 规则（–permanent     参数表示永久加入，重启依旧有效）</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#firewall-cmd --add-service=http –permanent</span></div></pre></td></tr></table></figure>
-<ol>
-<li>重启防火墙（在 linux 下 修改相关配置几乎都要 restart或者 reload 否则都不生效，别配置半天没有 restart然后气急败坏 ¬_¬ 好吧 这是我 ）</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#systemctl restart firewalld</span></div></pre></td></tr></table></figure>
-<ol>
-<li>使用浏览器访问你服务器对应ip 如果出现下面画面则配置成功</li>
-</ol>
-<p><img src="/2017/07/14/从零开始搭建LAMP开发环境/image004.gif" alt=""></p>
 <h2 id="二-配置-MySQL"><a href="#二-配置-MySQL" class="headerlink" title="(二)  配置 MySQL"></a>(二)  配置 MySQL</h2><ol>
 <li><p>使用 yum install 命令安装 mariadb mariadb-server</p>
 </li>
 <li><blockquote>
 <p>mariadb 是 mysql 的正统开 源分支</p>
 </blockquote>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#yum install mariadb mariadb-server</span></div></pre></td></tr></table></figure>
+<p> <img src="/2017/07/14/从零开始搭建LAMP开发环境/image005.gif" alt=""></p>
+</li>
+<li><p>开启 mariadb 服务</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#systemctl start mariadb</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>配置 mariadb 的用户名密码</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># mysql_secure_installation</span></div></pre></td></tr></table></figure>
+<p> <img src="/2017/07/14/从零开始搭建LAMP开发环境/image006.gif" alt=""></p>
+<p> 是否设置账户密码</p>
+<p> <img src="/2017/07/14/从零开始搭建LAMP开发环境/image007.gif" alt=""></p>
+<p> 设置密码</p>
+<p> <img src="/2017/07/14/从零开始搭建LAMP开发环境/image008.gif" alt="xshell"></p>
+<p> 移出匿名账户</p>
+<p> <img src="/2017/07/14/从零开始搭建LAMP开发环境/image009.gif" alt=""></p>
+<p> 禁止root远程登录</p>
+<p> <img src="/2017/07/14/从零开始搭建LAMP开发环境/image010.gif" alt=""></p>
+<p> 移除测试数据库</p>
+<p> <img src="/2017/07/14/从零开始搭建LAMP开发环境/image011.gif" alt=""></p>
+<p> 重新载入权限表（使配置生效）</p>
+<p> <img src="/2017/07/14/从零开始搭建LAMP开发环境/image012.gif" alt=""></p>
+<p> <img src="/2017/07/14/从零开始搭建LAMP开发环境/image013.gif" alt=""></p>
 </li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#yum install mariadb mariadb-server</span></div></pre></td></tr></table></figure>
-<p><img src="/2017/07/14/从零开始搭建LAMP开发环境/image005.gif" alt=""></p>
 <ol>
-<li>开启 mariadb 服务</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#systemctl start mariadb</span></div></pre></td></tr></table></figure>
-<ol>
-<li>配置 mariadb 的用户名密码</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># mysql_secure_installation</span></div></pre></td></tr></table></figure>
-<p><img src="/2017/07/14/从零开始搭建LAMP开发环境/image006.gif" alt=""></p>
-<p>是否设置账户密码</p>
-<p><img src="/2017/07/14/从零开始搭建LAMP开发环境/image007.gif" alt=""></p>
-<p>设置密码</p>
-<p><img src="/2017/07/14/从零开始搭建LAMP开发环境/image008.gif" alt="xshell"></p>
-<p>移出匿名账户</p>
-<p><img src="/2017/07/14/从零开始搭建LAMP开发环境/image009.gif" alt=""></p>
-<p>禁止root远程登录</p>
-<p><img src="/2017/07/14/从零开始搭建LAMP开发环境/image010.gif" alt=""></p>
-<p>移除测试数据库</p>
-<p><img src="/2017/07/14/从零开始搭建LAMP开发环境/image011.gif" alt=""></p>
-<p>重新载入权限表（使配置生效）</p>
-<p><img src="/2017/07/14/从零开始搭建LAMP开发环境/image012.gif" alt=""></p>
-<p><img src="/2017/07/14/从零开始搭建LAMP开发环境/image013.gif" alt=""></p>
-<ol>
-<li>重启 mariadb 服务</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#systemctl restart mariadb</span></div></pre></td></tr></table></figure>
-<ol>
-<li>测试连接数据库(-u 后面接用户名 注意不要加个空格)</li>
-</ol>
-<p><img src="/2017/07/14/从零开始搭建LAMP开发环境/image014.gif" alt=""></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#mysql -uroot -p</span></div></pre></td></tr></table></figure>
-<p><img src="/2017/07/14/从零开始搭建LAMP开发环境/image015.gif" alt=""></p>
-<ol>
-<li>测试 查询数据库</li>
+<li><p>重启 mariadb 服务</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#systemctl restart mariadb</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>测试连接数据库(-u 后面接用户名 注意不要加个空格)</p>
+<p> <img src="/2017/07/14/从零开始搭建LAMP开发环境/image014.gif" alt=""></p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#mysql -uroot -p</span></div></pre></td></tr></table></figure>
+<p> <img src="/2017/07/14/从零开始搭建LAMP开发环境/image015.gif" alt=""></p>
+</li>
+<li><p>测试 查询数据库</p>
+</li>
 <li><img src="/2017/07/14/从零开始搭建LAMP开发环境/image016.gif" alt=""></li>
 </ol>
 <h2 id="三-安装及配置-PHP"><a href="#三-安装及配置-PHP" class="headerlink" title="(三) 安装及配置 PHP"></a>(三) 安装及配置 PHP</h2><ol>
-<li>安装 php 及扩展（如 xml mysql 等常用扩展）</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># yum install php php-mysql php-gd libjpeg* php-ldap php-odbc php-pear   php-xml php-xmlrpc php-mbstring php-bcmath php-mhash</span></div></pre></td></tr></table></figure>
-<ol>
-<li>重启 apache 服务</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#systemctl restart httpd</span></div></pre></td></tr></table></figure>
-<ol>
-<li>安装 vim （emacs 滚粗）创建 php 测试文件</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#yum install vim</span></div><div class="line"><span class="comment">#vim /var/www/html/index.php</span></div></pre></td></tr></table></figure>
-<ol>
-<li>按下 i（插入模式）写下 hello world</li>
-<li>按下 Esc  输入“：” +“wq”（保存退出）</li>
-</ol>
-<p><img src="/2017/07/14/从零开始搭建LAMP开发环境/image018.gif" alt=""></p>
-<ol>
-<li>使用浏览器访问 ip 查看，成功效果图</li>
+<li><p>安装 php 及扩展（如 xml mysql 等常用扩展）</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># yum install php php-mysql php-gd libjpeg* php-ldap php-odbc php-pear   php-xml php-xmlrpc php-mbstring php-bcmath php-mhash</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>重启 apache 服务</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#systemctl restart httpd</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>安装 vim （emacs 滚粗）创建 php 测试文件</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#yum install vim</span></div><div class="line"><span class="comment">#vim /var/www/html/index.php</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>按下 i（插入模式）写下 hello world</p>
+</li>
+<li><p>按下 Esc  输入“：” +“wq”（保存退出）</p>
+<p> <img src="/2017/07/14/从零开始搭建LAMP开发环境/image018.gif" alt=""></p>
+</li>
+<li><p>使用浏览器访问 ip 查看，成功效果图</p>
+</li>
 </ol>
 <h2 id="四-配置-phpMyAdmin"><a href="#四-配置-phpMyAdmin" class="headerlink" title="(四) 配置 phpMyAdmin"></a>(四) 配置 phpMyAdmin</h2><ol>
-<li>安装 phpmyadmin 及 php 扩展</li>
+<li><p>安装 phpmyadmin 及 php 扩展</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#yum install phpmyadmin php-mcrypt</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>配置 phpmyadmin（默认只能·本地访问 所以我们得让他远程访问）</p>
+</li>
+<li><p>打开配置文件</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#vim  /etc/httpd/conf.d/phpMyAdmin.conf</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>按照如下修改（在配置文件 16-20  行 开启行数显示：在 vim 命令行下输入 set number）</p>
+</li>
+<li><p>重启 apache 服务器</p>
+</li>
+<li><p>用你的服务器 ip 加上 phpmyadmin 如：<a href="http://112.112.112.112/phpmyadmin" target="_blank" rel="external">http://112.112.112.112/phpmyadmin</a></p>
+</li>
+<li><p>输入刚刚配置 mariadb 得用户名及密码即可正常使用</p>
+<p> <img src="/2017/07/14/从零开始搭建LAMP开发环境/image022.gif" alt=""></p>
+</li>
+<li><p>输入刚刚配置mariadb 得用户名及密码即可正常使用</p>
+<p> <img src="/2017/07/14/从零开始搭建LAMP开发环境/image023.gif" alt=""></p>
+</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#yum install phpmyadmin php-mcrypt</span></div></pre></td></tr></table></figure>
-<ol>
-<li>配置 phpmyadmin（默认只能·本地访问 所以我们得让他远程访问）</li>
-<li>打开配置文件</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#vim  /etc/httpd/conf.d/phpMyAdmin.conf</span></div></pre></td></tr></table></figure>
-<ol>
-<li>按照如下修改（在配置文件 16-20  行 开启行数显示：在 vim 命令行下输入 set number）</li>
-</ol>
-<ol>
-<li>重启 apache 服务器</li>
-<li>用你的服务器 ip 加上 phpmyadmin 如：<a href="http://112.112.112.112/phpmyadmin" target="_blank" rel="external">http://112.112.112.112/phpmyadmin</a></li>
-<li>输入刚刚配置 mariadb 得用户名及密码即可正常使用</li>
-</ol>
-<p><img src="/2017/07/14/从零开始搭建LAMP开发环境/image022.gif" alt=""></p>
-<ol>
-<li>输入刚刚配置mariadb 得用户名及密码即可正常使用</li>
-</ol>
-<p><img src="/2017/07/14/从零开始搭建LAMP开发环境/image023.gif" alt=""></p>
 
       
 
@@ -919,6 +909,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">LAMP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Security</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">c#</a>
               </li>
              
@@ -927,19 +929,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Security</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">chrome extension</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">LAMP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
             
             <div class="clearfix"></div>
