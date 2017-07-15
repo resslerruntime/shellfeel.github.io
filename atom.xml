@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://shellfeel.github.io/"/>
-  <updated>2017-07-15T07:13:52.456Z</updated>
+  <updated>2017-07-15T09:28:34.905Z</updated>
   <id>https://shellfeel.github.io/</id>
   
   <author>
@@ -14,6 +14,424 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>基于web制作简单的通讯录</title>
+    <link href="https://shellfeel.github.io/2017/07/15/%E5%9F%BA%E4%BA%8Eweb%E5%88%B6%E4%BD%9C%E7%AE%80%E5%8D%95%E7%9A%84%E9%80%9A%E8%AE%AF%E5%BD%95/"/>
+    <id>https://shellfeel.github.io/2017/07/15/基于web制作简单的通讯录/</id>
+    <published>2017-07-15T07:51:41.000Z</published>
+    <updated>2017-07-15T09:28:34.905Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="名词解释："><a href="#名词解释：" class="headerlink" title="名词解释："></a>名词解释：</h1><blockquote>
+<p><strong>CRUD</strong> : CRUD是指在做计算处理时的增加(Create)、读取查询(Retrieve)、更新(Update)和删除(Delete)几个单词的首字母简写。主要被用在描述软件系统中数据库或者<a href="http://baike.baidu.com/item/%E6%8C%81%E4%B9%85%E5%B1%82" target="_blank" rel="external">持久层</a>的基本操作功能。</p>
+<p><strong>XAMPP</strong>: XAMPP（Apache+MySQL+PHP+PERL）是一个功能强大的建站集成软件包。这个软件包原来的名字是 LAMPP，但是为了避免误解，最新的几个版本就改名为 XAMPP 了。它可以在Windows、Linux、Solaris、Mac OS X 等多种操作系统下安装使用，支持多语言：英文、简体中文、繁体中文、韩文、俄文、日文等。许多人通过他们自己的经验认识到安装 Apache 服务器是件不容易的事儿。如果您想添加 MySQL、PHP 和 Perl，那就更难了。XAMPP 是一个易于安装且包含 MySQL、PHP 和 Perl 的 Apache 发行版。XAMPP 的确非常容易安装和使用：只需下载，解压缩，启动即可。</p>
+<p><strong>Apache</strong>: Apache是世界使用排名第一的Web服务器软件。它可以运行在几乎所有广泛使用的计算机平台上，由于其跨平台和安全性被广泛使用，是最流行的Web服务器端软件之一。它快速、可靠并且可通过简单的API扩充，将Perl/Python等解释器编译到服务器中。</p>
+<p><strong>LAMP</strong>: Linux+Apache+Mysql/MariaDB+Perl/PHP/Python一组常用来搭建动态网站或者服务器的开源软件，本身都是各自独立的程序，但是因为常被放在一起使用，拥有了越来越高的兼容度，共同组成了一个强大的Web应用程序平台。随着开源潮流的蓬勃发展，开放源代码的LAMP已经与J2EE和.Net商业软件形成三足鼎立之势，并且该软件开发的项目在软件方面的投资成本较低，因此受到整个IT界的关注。从网站的流量上来说，70%以上的访问流量是LAMP来提供的，LAMP是最强大的网站解决方案．</p>
+<p><strong>LNMP</strong>: LNMP代表的就是：Linux系统下Nginx+MySQL+PHP这种网站服务器架构。</p>
+</blockquote>
+<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p><img src="/2017/07/15/基于web制作简单的通讯录/image002.gif" alt=""></p>
+<p>为了方便分析我们忽略DNS 、路由等复杂的网络情况</p>
+<p>分为三个过程：</p>
+<ol>
+<li>用户发送 HTTP 请求到我们服务器容器 ，服务器接受我们的请求（服务器容器原理就是监听服务器上的特定端口 像 HTTP 默认就是 80），服务器判断我们请求的文件型 ，如果是静态文件 （文件后以.html.shtml.htm 结尾）就直接去我们对应文件目录下寻找并返回。 </li>
+<li>如果是动态文件类型 这时候来到我们的第二步，我们的服务器容器(nginx)是没有办法直接解析动态文件类型（文件后缀 一般以.php .asp .jsp 结尾）的，这时候他没办法处理就将请求进行转发给 cgi 程序，cgi 程序（如 php、asp 和现在比较火的 python 等） cgi 做处理 ，将处理后的·结果返回给服务器 服务器再通过 HTTP 响应返回给我们 如果我们的请求还涉及到数据库 那就到第三步</li>
+<li>第三步 cgi 程序与数据库 进行数据交换 数据库取出需要的数据（比如你的同户名、密码等）给 cgi 程序 cgi 做出处理在返回给服务器容器 服务器容器再返回给我们 </li>
+</ol>
+<h1 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h1><p>你已经安装有 xampp ，并使用默认配置（你没有去瞎搞） </p>
+<h1 id="热身"><a href="#热身" class="headerlink" title="热身"></a>热身</h1><ol>
+<li><p>打开 Apache 服务器 及 mysql 服务(有 的同学会apahce打不开的情况一般都是端口占用请自行百度)</p>
+<p><img src="/2017/07/15/基于web制作简单的通讯录/image004.jpg" alt=""></p>
+<p><img src="/2017/07/15/基于web制作简单的通讯录/image007.jpg" alt=""></p>
+</li>
+<li><p>打开浏览器输入（<a href="http://127.0.0.1/" target="_blank" rel="external">http</a><a href="http://127.0.0.1/" target="_blank" rel="external">://127.0.0.1/</a><a href="http://127.0.0.1/" target="_blank" rel="external">）</a> 能看到页面证明成功</p>
+</li>
+<li><p>在你的 xampp安装目录下有个 htdoc 文件夹</p>
+<p><img src="/2017/07/15/基于web制作简单的通讯录/image010.jpg" alt=""></p>
+</li>
+<li><p>在里面新建文件夹叫 ctaa（后面的操作都在这个文件夹下面操作） </p>
+<p><img src="/2017/07/15/基于web制作简单的通讯录/image013.jpg" alt=""></p>
+</li>
+<li><p>新建文件 取名 index.php(有的同学无法改后缀名是因为系统没有开启后缀名显示，自行百度解决) </p>
+</li>
+<li><p>文件内容 </p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">  <span class="keyword">echo</span> <span class="string">'hello world'</span>;</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>在浏览器输入地址 <a href="http://127.0.0.1/ctaa/index.php" target="_blank" rel="external">http://127.0.0.1/ctaa/index.php</a><a href="http://127.0.0.1/ctaa/index.php" target="_blank" rel="external">（</a><em>相信你已经知道此</em><br><em>url 的含义</em>），会看到浏览器输出 hello world 这就是你的第一个 php 程序</p>
+</li>
+</ol>
+<p>到此热身结束</p>
+<h1 id="实际项目分析"><a href="#实际项目分析" class="headerlink" title="实际项目分析"></a>实际项目分析</h1><h2 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h2><p>我们要制作一个在线的通讯录管理小软件 具备<strong>增加</strong>联系人、<strong>删除</strong>联系人、<strong>查找</strong>联系人、<strong>修改</strong>联系人信息的功能</p>
+<h3 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h3><ol>
+<li>首先 具备一个主页面（index.php）展示所有的联系人，同时应该有删除按钮删除对应的联系人</li>
+<li>修改页面</li>
+<li>增加页面</li>
+</ol>
+<h3 id="后端"><a href="#后端" class="headerlink" title="后端"></a>后端</h3><ol>
+<li><p>数据库设计 </p>
+</li>
+<li><p>连接数据库模块 </p>
+</li>
+</ol>
+<ol>
+<li>查询模块 </li>
+</ol>
+<ol>
+<li>删除模块 </li>
+</ol>
+<ol>
+<li>增加模块 </li>
+</ol>
+<h2 id="数据库设计"><a href="#数据库设计" class="headerlink" title="数据库设计"></a>数据库设计</h2><p><img src="/2017/07/15/基于web制作简单的通讯录/image016.jpg" alt=""></p>
+<p>我们从手机的通讯录里面可以看到一般的通讯录包含一下几个关键内容</p>
+<ol>
+<li>姓名</li>
+<li>电话</li>
+<li>手机</li>
+<li>电子邮件</li>
+<li>个人</li>
+</ol>
+<p>所以我们的数据库基本内容也就成型了</p>
+<p><strong>数据库 库、表、字段理解</strong></p>
+<p><img src="/2017/07/15/基于web制作简单的通讯录/image017.jpg" alt=""></p>
+<blockquote>
+<p><strong>库</strong>：故名思意就是仓库 相同的东西放在一起统一管理 往往我们一个服务器上要运行不止一个应用<br>不同应用都需要用到数据库 为了数据隔离 我们用不的库代表不同的应用 </p>
+<p><strong>表</strong>：一个应用里面需要用到的数据不一样 为了防止数据冗余 我们尽量将我们的数据拆分成多个表（即 满足数据库的第一范式 ）</p>
+<p><strong>字段</strong>：字段就是具体的内容 </p>
+</blockquote>
+<p>我们这个应用采用最简功能我们就不做拆分了 设计为 </p>
+<p>库名 <code>AddressBook</code>表（一个）：<code>BaseInfo</code></p>
+<p>字段：<code>id</code>、<code>name</code>、<code>telPhone</code>、<code>mobilePhone</code>、<code>email</code>、<code>address</code> </p>
+<h2 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h2><ul>
+<li><p>打开浏览器输入<a href="http://127.0.0.1/phpmyadmin" target="_blank" rel="external">http://127.0.0.1/phpmyadmin</a><a href="http://127.0.0.1/phpmyadmin" target="_blank" rel="external"> </a>(phpmyamdin<br>是一个基于 web 的数据库管理软件) </p>
+</li>
+<li><p>默认没有密码直接进入，有密码的默认用户名密码都是root 效果图：</p>
+<p><img src="/2017/07/15/基于web制作简单的通讯录/image019.jpg" alt=""></p>
+</li>
+<li><p>选择左边的数据库里面的新建库名为 <code>addressbook</code>排序规则选择 <code>utf8-geberally’ci</code>（多语言支持、防止出现乱码、至于什么是编码我们又可以讲几个小时这里就不说了 ） </p>
+</li>
+<li><p>接下来输入表名 <code>baseInfo</code> 字段数按照实际需求填写 我们这里填写 <strong>6</strong></p>
+</li>
+<li><p>接下来填写字段信息除<code>id</code>选择 int、 a_i打上勾其他选择 varchar 长度给定值即可（学过 c 语言应该知道int 和 char 的区别，char 值得定长字符串 缺点是空间占用大，varchar 是变长的字符串类型能有效节省空间，a_i 指的是自动增长选上过后每增加一个记录就会加一） </p>
+<p><img src="/2017/07/15/基于web制作简单的通讯录/image022.jpg" alt=""></p>
+</li>
+<li><p>创建成功后的效果图</p>
+<p><img src="/2017/07/15/基于web制作简单的通讯录/image023.gif" alt=""></p>
+</li>
+</ul>
+<h2 id="连接数据库-conn-php"><a href="#连接数据库-conn-php" class="headerlink" title="连接数据库(conn.php)"></a>连接数据库(<em>conn.php</em>)</h2><ul>
+<li><p>创建 conn.php写入如下内容（详细内容见注释）这个文件实现的功能是建立与数据库的连接</p>
+<blockquote>
+<ul>
+<li><code>mysqli_connect</code>(数据库地址，用户名，密码，数据库名) </li>
+<li>由于是在本地操作数据库地址为 localhost </li>
+<li>用户名密码默认为 root root，或者 root 空</li>
+<li><code>mysqli_set_charset</code>(连接指针，编码集) 此函数用作设置编码集因为默认mysqli 函数编码方式为 latin 写入中文会造成乱码  </li>
+</ul>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 建立与mysql的连接</span></div><div class="line">$conn = mysqli_connect(<span class="string">"localhost"</span>,<span class="string">"root"</span>,<span class="string">""</span>,<span class="string">"addressbook"</span>);</div><div class="line">mysqli_set_charset($conn,<span class="string">"utf-8"</span>);</div><div class="line"><span class="keyword">if</span>(!conn)&#123;</div><div class="line">  <span class="keyword">die</span>(<span class="string">'Could not connect: '</span>.mysql_error());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="增加联系人模块-add-php"><a href="#增加联系人模块-add-php" class="headerlink" title="增加联系人模块(add.php)"></a>增加联系人模块(add.php)</h2><ul>
+<li><p>第一步引人连接数据库模块(conn.php) </p>
+<blockquote>
+<ul>
+<li>使用 require或者 include 函数都可以（学过 c 语言应该都知道include 函数吧 效果都差不多）这里注意 require 和include 的区别。 </li>
+<li>require 引入模块 如果模块内部存在错误 则整个文件将无法运行 include 则会抛弃错误继续运行实际代码如下：</li>
+</ul>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">  <span class="keyword">require</span>(<span class="string">'./conn.php'</span>);</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>第二步 新建文件 add.html 文件 写入布局文件（只实现功能就不管外观了 2333） </p>
+<ul>
+<li>注意表单 form 里面的action 填写我们刚刚新建的 add.php 专门用于接受我们 post 过去的数据</li>
+<li>注意每个 input 项目的 name 值 </li>
+</ul>
+<p><img src="/2017/07/15/基于web制作简单的通讯录/image034.jpg" alt=""></p>
+</li>
+<li><p>在add.php 模块用$_POST[‘’]接受表单的每一个数据</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">  <span class="keyword">require</span>(<span class="string">'./conn.php'</span>);</div><div class="line">  $name = $_POST[<span class="string">'name'</span>];</div><div class="line">  $telPhone = $_POST[<span class="string">'telPhone'</span>];</div><div class="line">  $mobilePhone = $_POST[<span class="string">'mobilePhone'</span>];</div><div class="line">  $email = $_POST[<span class="string">'email'</span>];</div><div class="line">  $address = $_POST[<span class="string">'address'</span>];</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+</ul>
+<ul>
+<li><p>sql 的插入语句保存进入数据库 </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> baseinfo <span class="keyword">VALUES</span>(<span class="string">''</span>,<span class="keyword">name</span>,telPhone,mobilePhone,email,address);</div></pre></td></tr></table></figure>
+</li>
+<li><p>执行sql 语句 </p>
+<ul>
+<li>使用sql 变量封装 sql 语句（虽然这不安全，容易造成 sql 注入攻击） </li>
+<li>这段 sql语句的含义是插入数据库 我们刚刚提交的参数</li>
+<li><code>mysqli_query</code>(连接指针，sql 语句) 这个函数的功能是执行 sql 语句 </li>
+</ul>
+<p><img src="/2017/07/15/基于web制作简单的通讯录/image043.jpg" alt=""></p>
+</li>
+<li><p>浏览器访问 <a href="http://127.0.0.1/ctaa/add.html" target="_blank" rel="external">http://127.0.0.1/ctaa/add.html</a> 输入数据并访问</p>
+<p><img src="/2017/07/15/基于web制作简单的通讯录/image046.jpg" alt=""></p>
+</li>
+<li><p>浏览器跳转到<a href="http://127.0.0.1/ctaa/add.php" target="_blank" rel="external"> </a><a href="http://127.0.0.1/ctaa/add.php" target="_blank" rel="external">http://127.0.0.1/ctaa/add.php</a><a href="http://127.0.0.1/ctaa/add.php" target="_blank" rel="external"> </a>效果图： </p>
+<p><img src="/2017/07/15/基于web制作简单的通讯录/image049.jpg" alt=""></p>
+</li>
+<li><p>我们访问<a href="http://127.0.0.1/phpmyadmin/" target="_blank" rel="external"> </a><a href="http://127.0.0.1/phpmyadmin/" target="_blank" rel="external">http://127.0.0.1/phpmyadmin/</a><a href="http://127.0.0.1/phpmyadmin/" target="_blank" rel="external">到</a>我们的数据看看</p>
+<ul>
+<li>可以看到我们的数据库已经写入到数据中</li>
+</ul>
+<p><img src="/2017/07/15/基于web制作简单的通讯录/image052.jpg" alt=""></p>
+</li>
+<li><p>我们多次执行，写入更多数据</p>
+<ul>
+<li>有的同学可能对前面的 id 有疑问 为什么不是从 1 开始，这是因为我在之前也写入过数据 只不过删除了<br>，这个 id 可以唯一确定一个人 就算有重名的也没关系这个东西又叫主键。</li>
+</ul>
+<p><img src="/2017/07/15/基于web制作简单的通讯录/image055.jpg" alt=""></p>
+</li>
+</ul>
+<h2 id="查询模块（index-php）"><a href="#查询模块（index-php）" class="headerlink" title="查询模块（index.php）"></a>查询模块（<em>index.php</em>）</h2><p>我们已经有了这么多数据 ，如何在我们的网页中展示出来呢 </p>
+<ul>
+<li><p>新建 index.php文件</p>
+</li>
+<li><p>第一步 引入 conn.php（涉及数据库操作的都要引入此文件 想想为什么）</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">  <span class="keyword">require</span>(<span class="string">'./conn.php'</span>);</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>第二步写查询sql 语句并保存在变量$sql 语句中(这里想到一个笑话 为什么说 php 程序猿是最有钱的，因为他们的代码中y有很多美元~~~~2333) </p>
+</li>
+<li><p>第三步执行查询</p>
+<ul>
+<li><code>mysqli_query</code>(数据库连接指针，sql语句) 此函数的功能是执行查询 sqll 语句,返回结果对象</li>
+<li><code>mysqli_query</code>(查询结果对象) 将查询结果对象转化为多位数组 </li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">  <span class="keyword">require</span>(./conn.php);</div><div class="line">  <span class="comment">// 定义sql语句</span></div><div class="line">  $sql = <span class="string">"SELECT * FROM baseinfo"</span>;</div><div class="line">  $arr = mysqli_query($conn,$sql);</div><div class="line">  <span class="keyword">echo</span> <span class="string">'&lt;pre&gt;'</span>;</div><div class="line">  <span class="comment">// 将结果对象转化为多维数组</span></div><div class="line">  $list = mysqli_fetch_all($arr);</div><div class="line">  print_r($list);</div><div class="line">  <span class="keyword">echo</span> <span class="string">'&lt;/pre&gt;'</span>;</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>浏览器输入 <a href="http://127.0.0.1/ctaa/index.php" target="_blank" rel="external">http://127.0.0.1/ctaa/index.php</a></p>
+<ul>
+<li>可以看到我们已经从数据库中得到结果了（为了方便查看我使用了<br>pre 预格式输出）</li>
+<li>接下来讲这些数据嵌入在我们的 html 中就可以用了</li>
+</ul>
+<p><img src="/2017/07/15/基于web制作简单的通讯录/image064.jpg" alt=""></p>
+</li>
+<li><p>写入 html布局文件</p>
+<p><img src="/2017/07/15/基于web制作简单的通讯录/image067.jpg" alt=""></p>
+</li>
+<li><p>浏览器输入 <a href="http://127.0.0.1/ctaa/index.php" target="_blank" rel="external">http://127.0.0.1/ctaa/index.php</a><a href="http://127.0.0.1/ctaa/index.php" target="_blank" rel="external"> </a>查看效果</p>
+<ul>
+<li>可以看到已经得到我们想要的内容（不要管外观啦~~）</li>
+<li>下面增加了一个跳转到增加联系人的链接</li>
+</ul>
+<p><img src="/2017/07/15/基于web制作简单的通讯录/image070.jpg" alt=""></p>
+</li>
+<li><p>这样是达到了输出的功能 但是还不能修改 所以我们在表格后面增加上一个<br>修改删除的操作并附带上 id</p>
+<ul>
+<li>可以仔细看看与上面的区别</li>
+<li>我们相当于将多维数组的二重数组的 id 给了我们的跳转链接，这样的目的是我们每次点击删除或者修改就会附带上我们的 id 参数，后端就可以判断是是要删除哪一个或者修改哪一个</li>
+</ul>
+<p><img src="/2017/07/15/基于web制作简单的通讯录/image073.jpg" alt=""></p>
+</li>
+<li><p>前端效果</p>
+</li>
+</ul>
+<p><img src="/2017/07/15/基于web制作简单的通讯录/image076.jpg" alt=""></p>
+<h2 id="修改模块"><a href="#修改模块" class="headerlink" title="修改模块"></a>修改模块</h2><ul>
+<li><p>在同目录下新建edit.php </p>
+</li>
+<li><p>第一步引入我们的数据库连接模块 conn.php </p>
+</li>
+<li><p>第二步获取我们主页 get 过来的 id 参数 </p>
+</li>
+<li><p>第三步 封装查询 sql 语句</p>
+</li>
+<li><p>第四步执行 sql 语句 将我们的数据先查出来 </p>
+<p><img src="/2017/07/15/基于web制作简单的通讯录/image079.jpg" alt=""></p>
+<p><img src="/2017/07/15/基于web制作简单的通讯录/image082.jpg" alt=""></p>
+</li>
+</ul>
+<ul>
+<li><p>第五步 前端布局（可以采用类似 add.html 的布局方式 给每个 input 的 value 附带上值将 action 改成我们想要处理的地址 edit.php）</p>
+<p><img src="/2017/07/15/基于web制作简单的通讯录/image085.jpg" alt=""></p>
+</li>
+<li><p>我们从主页（<a href="http://127.0.0.1/ctaa/index.php" target="_blank" rel="external">http://127.0.01/ctaa/index.php</a><a href="http://127.0.0.1/ctaa/index.php" target="_blank" rel="external"> </a>）随便点击一个人进入 发现我们的信息已经正确填充 </p>
+<p><img src="/2017/07/15/基于web制作简单的通讯录/image088.jpg" alt=""></p>
+</li>
+<li><p>书写修改逻辑判断函数 ，首先我们在提交后判断有没有修改如果没有修改我们就报错</p>
+<p><img src="/2017/07/15/基于web制作简单的通讯录/image091.jpg" alt=""></p>
+</li>
+<li><p>接着接受此表单 post 的数据</p>
+<ul>
+<li>变量前面的@表示忽略错误 因为刚进入修改页面没点提交修改按钮是没有 post 数据的，如果不加@就会报错</li>
+</ul>
+<p><img src="/2017/07/15/基于web制作简单的通讯录/image094.jpg" alt=""></p>
+</li>
+<li><p>封装修改 sql 语句 </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$sql = "<span class="keyword">UPDATE</span> baseinfo <span class="keyword">SET</span> <span class="keyword">name</span>=<span class="string">'$name'</span>,telPhone=$telPhone,mobilePhone=$mobiblePhone,email=<span class="string">'$email'</span>,address=<span class="string">'$address'</span> <span class="keyword">WHERE</span> <span class="keyword">id</span>=$<span class="keyword">id</span><span class="string">";</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>执行sql 语句</p>
+<p><img src="/2017/07/15/基于web制作简单的通讯录/image100.jpg" alt=""></p>
+</li>
+<li><p>试一下</p>
+<ul>
+<li>将我的名字改成“熊小飞非常帅” 提交 </li>
+<li>点击提交后显示修改成功</li>
+<li>为什么只有个“熊小飞非常”呢？难道我的帅气展示不出来？？？（黑人问号） </li>
+<li>我们回想到我们在数据库设计的时候定义了个数据最大长度的定义varchar(5) 既最大长度是 5 ，我们这里输入了 6 个字 所以就没法保存“帅”啦，，唉唉~~ </li>
+</ul>
+<p><img src="/2017/07/15/基于web制作简单的通讯录/image103.jpg" alt=""></p>
+<p><img src="/2017/07/15/基于web制作简单的通讯录/image105.jpg" alt=""></p>
+<p><img src="/2017/07/15/基于web制作简单的通讯录/image108.jpg" alt=""></p>
+</li>
+</ul>
+<h2 id="删除模块（delete-php）"><a href="#删除模块（delete-php）" class="headerlink" title="删除模块（delete.php）"></a>删除模块（<em>delete.php</em>）</h2><ul>
+<li><p>老规矩还是新建 delete.php</p>
+</li>
+<li><p>其实到这里很多同学其实已经会了 （不就是每个地方的 sql 语句不同吗？！ 摔） </p>
+</li>
+<li><p>这里就不详细说明了直接贴代码</p>
+<p><img src="/2017/07/15/基于web制作简单的通讯录/image111.jpg" alt=""></p>
+</li>
+<li><p>效果演示</p>
+</li>
+</ul>
+<p><img src="/2017/07/15/基于web制作简单的通讯录/image114.jpg" alt=""></p>
+<p><img src="/2017/07/15/基于web制作简单的通讯录/image116.jpg" alt=""><img src="/2017/07/15/基于web制作简单的通讯录/image119.jpg" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;名词解释：&quot;&gt;&lt;a href=&quot;#名词解释：&quot; class=&quot;headerlink&quot; title=&quot;名词解释：&quot;&gt;&lt;/a&gt;名词解释：&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;CRUD&lt;/strong&gt; : CRUD是指在做计算处理时的增加(Crea
+    
+    </summary>
+    
+      <category term="开发" scheme="https://shellfeel.github.io/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="php" scheme="https://shellfeel.github.io/tags/php/"/>
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://shellfeel.github.io/2017/07/15/%E5%9F%BA%E4%BA%8Eweb%E5%88%B6%E4%BD%9C%E7%AE%80%E5%8D%95%E7%9A%84%E9%80%9A%E8%AE%AF%E5%BD%95/header/"/>
+    <id>https://shellfeel.github.io/2017/07/15/基于web制作简单的通讯录/header/</id>
+    <published>2017-07-14T16:00:00.000Z</published>
+    <updated>2017-07-15T08:59:48.799Z</updated>
+    
+    <content type="html"><![CDATA[<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns:m="http://schemas.microsoft.com/office/2004/12/omml" xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta name="ProgId" content="Word.Document">
+<meta name="Generator" content="Microsoft Word 15">
+<meta name="Originator" content="Microsoft Word 15">
+<link id="Main-File" rel="Main-File" href="../����ͨѶ¼�����̳�_CTAA(1).htm">
+</head>
+
+<body lang="ZH-CN" link="#0563C1">
+
+<div style="mso-element:footnote-separator" id="fs">
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal"><span lang="EN-US"><span style="mso-special-character:footnote-separator"><![if !supportFootnotes]>
+
+<hr align="left" size="1" width="33%">
+
+<![endif]></span></span></p>
+
+</div>
+
+<div style="mso-element:footnote-continuation-separator" id="fcs">
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal"><span lang="EN-US"><span style="mso-special-character:footnote-continuation-separator"><![if !supportFootnotes]>
+
+<hr align="left" size="1">
+
+<![endif]></span></span></p>
+
+</div>
+
+<div style="mso-element:endnote-separator" id="es">
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal"><span lang="EN-US"><span style="mso-special-character:footnote-separator"><![if !supportFootnotes]>
+
+<hr align="left" size="1" width="33%">
+
+<![endif]></span></span></p>
+
+</div>
+
+<div style="mso-element:endnote-continuation-separator" id="ecs">
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal"><span lang="EN-US"><span style="mso-special-character:footnote-continuation-separator"><![if !supportFootnotes]>
+
+<hr align="left" size="1">
+
+<![endif]></span></span></p>
+
+</div>
+
+<div style="mso-element:footer" id="ef1">
+
+<p class="MsoNormal" align="center" style="margin-top:0cm;margin-right:42.95pt;
+margin-bottom:2.1pt;margin-left:0cm;text-align:center;text-indent:0cm;
+line-height:107%"><!--[if supportFields]><span lang=EN-US><span
+style='mso-element:field-begin'></span><span
+style='mso-spacerun:yes'>&nbsp;</span>PAGE<span
+style='mso-spacerun:yes'>&nbsp;&nbsp; </span>\* MERGEFORMAT <span
+style='mso-element:field-separator'></span></span><![endif]--><span lang="EN-US" style="font-size:9.0pt;mso-bidi-font-size:11.0pt;line-height:107%">1</span><!--[if supportFields]><span
+lang=EN-US style='font-size:9.0pt;mso-bidi-font-size:11.0pt;line-height:107%'><span
+style='mso-element:field-end'></span></span><![endif]--><span lang="EN-US" style="font-size:9.0pt;mso-bidi-font-size:11.0pt;line-height:107%"> </span></p>
+
+<p class="MsoNormal" style="margin-top:0cm;margin-right:0cm;margin-bottom:0cm;
+margin-left:.8pt;margin-bottom:.0001pt;text-indent:0cm;line-height:107%"><span lang="EN-US" style="font-size:9.0pt;mso-bidi-font-size:11.0pt;line-height:107%"><span style="mso-spacerun:yes">&nbsp;</span></span></p>
+
+</div>
+
+<div style="mso-element:footer" id="f1">
+
+<p class="MsoNormal" align="center" style="margin-top:0cm;margin-right:42.95pt;
+margin-bottom:2.1pt;margin-left:0cm;text-align:center;text-indent:0cm;
+line-height:107%"><!--[if supportFields]><span lang=EN-US><span
+style='mso-element:field-begin'></span><span
+style='mso-spacerun:yes'>&nbsp;</span>PAGE<span
+style='mso-spacerun:yes'>&nbsp;&nbsp; </span>\* MERGEFORMAT <span
+style='mso-element:field-separator'></span></span><![endif]--><span lang="EN-US" style="font-size:9.0pt;mso-bidi-font-size:11.0pt;line-height:107%;mso-no-proof:
+yes">3</span><!--[if supportFields]><span lang=EN-US style='font-size:9.0pt;
+mso-bidi-font-size:11.0pt;line-height:107%'><span style='mso-element:field-end'></span></span><![endif]--><span lang="EN-US" style="font-size:9.0pt;mso-bidi-font-size:11.0pt;line-height:107%"> </span></p>
+
+<p class="MsoNormal" style="margin-top:0cm;margin-right:0cm;margin-bottom:0cm;
+margin-left:.8pt;margin-bottom:.0001pt;text-indent:0cm;line-height:107%"><span lang="EN-US" style="font-size:9.0pt;mso-bidi-font-size:11.0pt;line-height:107%"><span style="mso-spacerun:yes">&nbsp;</span></span></p>
+
+</div>
+
+<div style="mso-element:footer" id="ff1">
+
+<p class="MsoNormal" align="center" style="margin-top:0cm;margin-right:42.95pt;
+margin-bottom:2.1pt;margin-left:0cm;text-align:center;text-indent:0cm;
+line-height:107%"><!--[if supportFields]><span lang=EN-US><span
+style='mso-element:field-begin'></span><span
+style='mso-spacerun:yes'>&nbsp;</span>PAGE<span
+style='mso-spacerun:yes'>&nbsp;&nbsp; </span>\* MERGEFORMAT <span
+style='mso-element:field-separator'></span></span><![endif]--><span lang="EN-US" style="font-size:9.0pt;mso-bidi-font-size:11.0pt;line-height:107%">1</span><!--[if supportFields]><span
+lang=EN-US style='font-size:9.0pt;mso-bidi-font-size:11.0pt;line-height:107%'><span
+style='mso-element:field-end'></span></span><![endif]--><span lang="EN-US" style="font-size:9.0pt;mso-bidi-font-size:11.0pt;line-height:107%"> </span></p>
+
+<p class="MsoNormal" style="margin-top:0cm;margin-right:0cm;margin-bottom:0cm;
+margin-left:.8pt;margin-bottom:.0001pt;text-indent:0cm;line-height:107%"><span lang="EN-US" style="font-size:9.0pt;mso-bidi-font-size:11.0pt;line-height:107%"><span style="mso-spacerun:yes">&nbsp;</span></span></p>
+
+</div>
+
+</body>
+
+</html>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;html xmlns:v=&quot;urn:schemas-microsoft-com:vml&quot; xmlns:o=&quot;urn:schemas-microsoft-com:office:office&quot; xmlns:w=&quot;urn:schemas-microsoft-com:office:wo
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>从零开始搭建LAMP开发环境</title>
