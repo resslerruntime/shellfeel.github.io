@@ -265,7 +265,7 @@
     <link href="https://shellfeel.github.io/2017/06/06/crackWifi/"/>
     <id>https://shellfeel.github.io/2017/06/06/crackWifi/</id>
     <published>2017-06-06T06:37:26.000Z</published>
-    <updated>2017-07-11T14:13:37.073Z</updated>
+    <updated>2017-07-15T07:18:28.781Z</updated>
     
     <content type="html"><![CDATA[<p>本实验是基于ubuntu系统，使用dsniff工具实现,kali下可以直接使用无需下载</p>
 <h3 id="1-下载相应软件"><a href="#1-下载相应软件" class="headerlink" title="1. 下载相应软件"></a>1. 下载相应软件</h3><p><code>$sudo apt install dsniff</code></p>
@@ -285,6 +285,8 @@
 &lt;h3 id=&quot;1-下载相应软件&quot;&gt;&lt;a href=&quot;#1-下载相应软件&quot; class=&quot;headerlink&quot; title=&quot;1. 下载相应软件&quot;&gt;&lt;/a&gt;1. 下载相应软件&lt;
     
     </summary>
+    
+      <category term="安全" scheme="https://shellfeel.github.io/categories/%E5%AE%89%E5%85%A8/"/>
     
     
       <category term="Security" scheme="https://shellfeel.github.io/tags/Security/"/>
